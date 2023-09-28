@@ -333,25 +333,19 @@ public class CallLogFragment extends Fragment
             if (holder instanceof CallLogListItemViewHolder){
                 CallLogListItemViewHolder viewHolder = ((CallLogListItemViewHolder)holder);
                 if (direction == ItemTouchHelper.LEFT){
-                    getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms",viewHolder.number, null)));
+                        getContext().startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel: "+viewHolder.number)));
+                    } else {
+                        getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms",viewHolder.number, null)));
+                    }
                     adapter.notifyItemChanged(holder.getAdapterPosition());
-                } else {
-                    //TODO: Make it thread safe
-                    getContext()
-                        .getContentResolver()
-                        .delete(
-                            CallLog.Calls.CONTENT_URI,
-                            CallLog.Calls._ID + " IN (" + concatCallIds(viewHolder.callIds) + ")" /* where */,
-                            null /* selectionArgs */);
                 }
             }
-        }
 
         @Override
         public void onChildDraw(Canvas canvas, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
             if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                 boolean isTowardsRight = dX > 0;
-                Drawable icon =  getResources().getDrawable(isTowardsRight ? R.drawable.quantum_ic_delete_vd_theme_24 : R.drawable.quantum_ic_message_vd_theme_24);
+                Drawable icon =  getResources().getDrawable(isTowardsRight ? R.drawable.quantum_ic_message_vd_theme_24 : R.drawable.quantum_ic_phone_vd_theme_24);
                 int iconHorizontalMargin = 20;
                 int halfIconSize = icon.getIntrinsicHeight() / 2;
                 int top = viewHolder.itemView.getTop() + ((viewHolder.itemView.getBottom() - viewHolder.itemView.getTop()) / 2 - halfIconSize);
