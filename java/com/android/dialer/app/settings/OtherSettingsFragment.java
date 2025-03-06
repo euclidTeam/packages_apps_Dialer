@@ -29,7 +29,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.android.dialer.app.R;
+import com.android.dialer.R;
 
 public class OtherSettingsFragment extends PreferenceFragmentCompat
     implements Preference.OnPreferenceChangeListener {
