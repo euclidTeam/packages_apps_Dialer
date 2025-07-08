@@ -119,7 +119,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/applicationLabel"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="false">
+        android:usesCleartextTraffic="false"
+        android:enableOnBackInvokedCallback="false">
 
         <activity
             android:name=".callstats.CallStatsDetailActivity"
